@@ -1,9 +1,11 @@
 {
   "extends": "airbnb",
+  "parser": "babel-eslint",
   "plugins": [
     "babel"
   ],
   "rules": {
+    "new-cap": 0,
     "comma-dangle": ["error", "only-multiline"],
     "max-len": [1, 175, 2, { "ignoreComments": true }],
     "no-cond-assign": [2, "except-parens"],
