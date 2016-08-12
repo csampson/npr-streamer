@@ -3,9 +3,9 @@
 import { URLSearchParams, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
-import Stations       from './stations';
+import Stations       from './stations.service';
 
-describe('Stations', () => {
+describe('StationsService', () => {
   const STATIONS_URL = 'http://public-radio-api.herokuapp.com/stations';
   let Http;
   let stationsService;

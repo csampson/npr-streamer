@@ -1,6 +1,6 @@
 /**
  * @overview Stations API interface
- * @module   stations
+ * @module   stations.service
  * @requires @angular/core/Injectable
  * @requires @angular/http/Http
  * @requires rxjs/Observable
