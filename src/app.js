@@ -16,7 +16,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 
-import Player from './components/player';
+import { Player } from './components';
 
 @Component({
   selector: 'app',

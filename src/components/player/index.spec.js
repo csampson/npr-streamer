@@ -2,12 +2,10 @@
 
 import Player from '.';
 
-describe('Player', () => {
-  let StationsService;
+describe('PlayerComponent', () => {
   let player;
 
   beforeEach(() => {
-    StationsService = sandbox.stub({ search: () => {} });
-    player = new Player(StationsService);
+    player = new Player();
   });
 });
