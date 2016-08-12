@@ -2,7 +2,6 @@
 
 const CommonsChunkPlugin   = require('webpack/lib/optimize/CommonsChunkPlugin');
 const DedupePlugin         = require('webpack/lib/optimize/DedupePlugin');
-const ExtractTextPlugin    = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin    = require('html-webpack-plugin');
 const OccurenceOrderPlugin = require('webpack/lib/optimize/OccurenceOrderPlugin');
 
@@ -35,7 +34,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+        loader: 'css-to-string-loader!css-loader'
       },
     ]
   },
