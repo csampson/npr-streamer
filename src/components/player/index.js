@@ -17,11 +17,27 @@ import template       from './template.html';
 })
 class Player {
   constructor() {
-    this.state = {
-      currentStation: null,
-      stations: [],
-      playing: false
-    };
+    this.station = null;
+    this.playing = false;
+  }
+
+  play() {
+    this.playing = true;
+    return this;
+  }
+
+  pause() {
+    this.playing = false;
+    return this;
+  }
+
+  load(station) {
+    if (!station) {
+      throw new Error('Must pass a station object to `Player#load`');
+    }
+
+    this.station = station;
+    return this;
   }
 }
 

@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --port 1337 --inline --progress --hot",
-    "test": "mocha test/spec-helper.js src/**/*.spec.js --compilers js:babel-register,test/ignore-assets --watch"
+    "test": "mocha test/spec-helper.js 'src/**/*.spec.js' --compilers js:babel-register,test/ignore-assets --watch"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
