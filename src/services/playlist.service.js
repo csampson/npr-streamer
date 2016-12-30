@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 class PlaylistService {
   constructor() {
     this.currentStation = null;
-    this.stations       = new Set();
+    this.stations       = new Map();
   }
 
   /**
@@ -23,7 +23,7 @@ class PlaylistService {
       throw new Error('Invalid or missing argument `station` for `Playlist#add`');
     }
 
-    this.stations.add(station);
+    this.stations.set(station.abbreviation, station);
     return this;
   }
 
@@ -37,27 +37,28 @@ class PlaylistService {
       throw new Error('Invalid or missing argument `station` for `Playlist#remove`');
     }
 
-    this.stations.delete(station);
+    this.stations.delete(station.abbreviation);
     return this;
   }
 
   /**
    * Set a given [pinned] station as the currently playing station
-   * @param   {Object} station - The given station object to set to now-playing
-   * @returns {PlaylistService} Playlist service instance
+   * @param   {Object} station - The given station object to stage
+   * @returns {Object} Station object that was staged
    */
-  play(station) {
+  load(station) {
     if (!station) {
-      throw new Error('Invalid or missing argument `station` for `Playlist#play`');
+      throw new Error('Invalid or missing argument `station` for `Playlist#load`');
     }
 
     // Add the station if it isn't already pinned
-    if (!this.stations.has(station)) {
+    if (!this.stations.has(station.abbreviation)) {
       this.add(station);
     }
 
     this.currentStation = station;
-    return this;
+
+    return station;
   }
 }
 

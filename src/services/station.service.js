@@ -3,6 +3,8 @@
  * @module   stations.service
  * @requires @angular/core/Injectable
  * @requires @angular/http/Http
+ * @requires @angular/http/RequestOptions
+ * @requires @angular/http/URLSearchParams
  * @requires rxjs/Observable
  */
 

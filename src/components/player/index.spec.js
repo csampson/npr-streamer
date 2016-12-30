@@ -11,8 +11,8 @@ describe('PlayerComponent', () => {
 
   describe('init', () => {
     it('should setup default state', () => {
-      player.should.have.property('station', null);
       player.playing.should.be.false;
+      player.should.have.property('station', null);
     });
   });
 
@@ -27,21 +27,6 @@ describe('PlayerComponent', () => {
     it('should change the state to paused', () => {
       player.play().pause();
       player.playing.should.be.false;
-    });
-  });
-
-  describe('#load', () => {
-    it('should load a given station object', () => {
-      const station = {};
-
-      player.load(station);
-      player.station.should.equal(station);
-    });
-
-    xcontext('when no station object is provided', () => { 
-      it('should throw an error', () => {
-        global.sandbox.spy(player, 'load');
-      });
     });
   });
 });

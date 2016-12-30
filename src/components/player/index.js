@@ -2,31 +2,34 @@
  * @overview Radio player widget
  * @module   player
  * @requires @angular/core
+ * @requires playlist.service
+ * @requires station.service
  * @requires style.css
  * @requires template.html
  */
 
-import { Component  } from '@angular/core';
-import styles         from './styles.css';
-import template       from './template.html';
-import StationService from '../../services/stations.service';
+import { Component  }  from '@angular/core';
+import styles          from './styles.css';
+import template        from './template.html';
+import { PlaylistService, StationService } from '../../services';
 
 @Component({
-  providers: [StationService],
+  providers: [StationService, PlaylistService],
   selector: 'player',
   styles: [styles],
   template
 })
 class Player {
   static get parameters() {
-    return [[StationService]];
+    return [[StationService], [PlaylistService]];
   }
 
-  constructor(stationService) {
-    this.station = null;
+  constructor(stationService, playlistService) {
     this.playing = false;
+    this.station = null;
 
-    this.stationService = stationService;
+    this.stationService  = stationService;
+    this.playlistService = playlistService;
   }
 
   play() {
@@ -39,16 +42,6 @@ class Player {
     return this;
   }
 
-  load(station) {
-    if (!station) {
-      throw new Error('Must pass a station object to `Player#load`');
-    }
-
-    this.station = JSON.stringify(station);
-
-    return this;
-  }
-
   streamLocal() {
     /** @todo Add options object to this call */
     global.navigator.geolocation.getCurrentPosition(
@@ -58,7 +51,9 @@ class Player {
 
         return this.stationService
           .search(filter)
-          .subscribe(stations => this.load(stations[0]));
+          .subscribe(stations => {
+            this.station = this.playlistService.load(stations[0]);
+          });
       },
       error => {
         /** @todo handle error */
