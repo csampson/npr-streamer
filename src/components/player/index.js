@@ -9,16 +9,24 @@
 import { Component  } from '@angular/core';
 import styles         from './styles.css';
 import template       from './template.html';
+import StationService from '../../services/stations.service';
 
 @Component({
+  providers: [StationService],
   selector: 'player',
   styles: [styles],
   template
 })
 class Player {
-  constructor() {
+  static get parameters() {
+    return [[StationService]];
+  }
+
+  constructor(stationService) {
     this.station = null;
     this.playing = false;
+
+    this.stationService = stationService;
   }
 
   play() {
@@ -36,7 +44,26 @@ class Player {
       throw new Error('Must pass a station object to `Player#load`');
     }
 
-    this.station = station;
+    this.station = JSON.stringify(station);
+
+    return this;
+  }
+
+  streamLocal() {
+    /** @todo Add options object to this call */
+    global.navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        const { longitude, latitude } = coords;
+        const filter = { geolocation: [latitude, longitude] };
+
+        return this.stationService
+          .search(filter)
+          .subscribe(stations => this.load(stations[0]));
+      },
+      error => {
+        /** @todo handle error */
+      });
+
     return this;
   }
 }
