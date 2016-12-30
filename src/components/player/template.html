@@ -1,9 +1,9 @@
-Playing: {{playing}}<br />
+Status: {{status}}<br />
 
 <button type='button' on-click='streamLocal()'>Listen</button>
 
-<button type='button' on-click='pause()' *ngIf='station'>
+<button type='button' on-click='toggle()' *ngIf='station'>
   {{station.call}}
-  <span *ngIf='playing'>[pause-icon]</span>
-  <span *ngIf='!playing'>[play-icon]</span>
+  <span *ngIf="status === 'playing'">[stop-icon]</span>
+  <span *ngIf="status === 'ready'">[play-icon]</span>
 </button>

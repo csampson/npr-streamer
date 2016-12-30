@@ -13,6 +13,10 @@ import styles          from './styles.css';
 import template        from './template.html';
 import { PlaylistService, StationService } from '../../services';
 
+const STATUS_PLAYING = 'playing';
+const STATUS_READY   = 'ready';
+const STATUS_LOADING = 'loading';
+
 @Component({
   providers: [StationService, PlaylistService],
   selector: 'player',
@@ -25,20 +29,25 @@ class Player {
   }
 
   constructor(stationService, playlistService) {
-    this.playing = false;
     this.station = null;
+    this.status  = STATUS_LOADING;
 
     this.stationService  = stationService;
     this.playlistService = playlistService;
   }
 
   play() {
-    this.playing = true;
+    this.status = STATUS_PLAYING;
     return this;
   }
 
-  pause() {
-    this.playing = false;
+  stop() {
+    this.status = STATUS_READY;
+    return this;
+  }
+
+  toggle() {
+    this.status = this.status === STATUS_READY ? STATUS_PLAYING : STATUS_READY;
     return this;
   }
 
@@ -53,6 +62,7 @@ class Player {
           .search(filter)
           .subscribe(stations => {
             this.station = this.playlistService.load(stations[0]);
+            this.play();
           });
       },
       error => {
