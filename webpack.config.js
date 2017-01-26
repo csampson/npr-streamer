@@ -2,8 +2,8 @@
 
 const CommonsChunkPlugin   = require('webpack/lib/optimize/CommonsChunkPlugin');
 const DedupePlugin         = require('webpack/lib/optimize/DedupePlugin');
-const HtmlWebpackPlugin    = require('html-webpack-plugin');
 const OccurenceOrderPlugin = require('webpack/lib/optimize/OccurenceOrderPlugin');
+const HtmlWebpackPlugin    = require('html-webpack-plugin');
 
 module.exports = {
   debug: true,
@@ -13,9 +13,8 @@ module.exports = {
   },
   devtool: 'cheap-module-eval-source-map',
   entry: {
-    app: './src/components/app',
-    polyfills: './src/polyfills.js',
-    vendor: './src/vendor.js'
+    main: './src/main.js',
+    polyfills: './src/polyfills.js'
   },
   module: {
     loaders: [
@@ -50,7 +49,7 @@ module.exports = {
       inject: false
     }),
     new CommonsChunkPlugin({
-      name: ['polyfills', 'vendor', 'app'].reverse()
+      name: ['polyfills', 'main'].reverse()
     }),
   ]
 };

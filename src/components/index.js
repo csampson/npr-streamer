@@ -1,1 +1,2 @@
-export { default as Player } from './player';
+export { default as AppComponent } from './app';
+export { default as PlayerComponent } from './player';
