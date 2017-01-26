@@ -5,14 +5,16 @@
  */
 
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/Rx';
 
 @Injectable()
 class PlaylistService {
   constructor() {
-    this.currentStation = null;
-    this.stations       = new Map();
-  }
+    this._current = new BehaviorSubject(null);
+    this.current  = this._current.asObservable();
 
+    this.stations = new Map();
+  }
   /**
    * Add a given station to the list of pinned stations
    * @param   {Object} station - The given station object to add
@@ -56,7 +58,8 @@ class PlaylistService {
       this.add(station);
     }
 
-    this.currentStation = station;
+    debugger;
+    this._current.next(Object.assign({}, station));
 
     return station;
   }

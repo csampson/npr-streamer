@@ -1,4 +1,6 @@
 <main class='app'>
-  <h1 class='header'>Sit back and listen to your favorite NPR stations.</h1>
+  {{station | async | json}}
+  {{! (station | async) | json}}
+  <h1 class='header' *ngIf='!(station | async)'>Sit back and listen to your favorite NPR stations.</h1>
   <player></player>
-</main>
+</main >
