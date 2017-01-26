@@ -1,0 +1,20 @@
+.station {
+  font-weight: 400;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 0;
+}
+
+.play {
+  border: 1px solid rgba(0,0,0,0.125);
+  border-radius: 100%;
+  background: none;
+  color: #FF715B;
+  padding: 2rem;
+  margin: 2rem auto 0;
+  display: block;
+}
+
+.play-icon {
+  font-size: 3rem;
+}
