@@ -1,0 +1,13 @@
+.play {
+  border: 1px solid rgba(0,0,0,0.25);
+  border-radius: 100%;
+  background: none;
+  color: #FF715B;
+  padding: 2rem;
+  margin: 3rem auto 0;
+  display: block;
+}
+
+.play-icon {
+  font-size: 2rem;
+}
