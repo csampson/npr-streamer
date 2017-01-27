@@ -58,7 +58,6 @@ class PlaylistService {
       this.add(station);
     }
 
-    debugger;
     this._current.next(Object.assign({}, station));
 
     return station;

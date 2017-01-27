@@ -24,10 +24,10 @@ class AppComponent {
 
   constructor(playlistService) {
     this.playlistService = playlistService;
-    this.station         = playlistService.current;
+    this.station         = null;
 
-    this.station.subscribe(current => {
-      console.log(current);
+    playlistService.current.subscribe(current => {
+      this.station = current;
     });
   }
 }
