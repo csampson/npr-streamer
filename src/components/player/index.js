@@ -61,8 +61,7 @@ class Player {
         return this.stationService
           .search(filter)
           .subscribe(stations => {
-            this.station = this.playlistService.load(stations[0]);
-            this.play();
+            debugger;
           });
       },
       error => {

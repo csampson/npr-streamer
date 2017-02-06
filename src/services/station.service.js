@@ -14,10 +14,6 @@ import { Observable } from 'rxjs/Observable';
 
 const STATIONS_URL = 'http://public-radio-api.herokuapp.com/stations';
 
-function deserialize(response) {
-  return response.json();
-}
-
 function handleError(error) {
   return Observable.throw(new Error('Unexpected error in fetching stations for Stations#search'));
 }
@@ -49,7 +45,20 @@ class StationService {
 
     return this.http
       .get(STATIONS_URL, requestOptions)
-      .map(deserialize)
+      .map(response => (
+        response.json()
+      ))
+      .flatMap(stations => (
+        Observable.forkJoin(stations.map(station => {
+          if (station.stream_url !== null) {
+            debugger;
+            return this.http.get(station.stream_url);
+          }
+
+          debugger;
+          return Observable.of(null);
+        }))
+      ))
       .catch(handleError);
   }
 }
