@@ -8,6 +8,7 @@
 
 import { Component } from '@angular/core';
 
+import { PlaylistService } from '../../services';
 import styles   from './styles.css';
 import template from './template.html';
 
@@ -16,6 +17,19 @@ import template from './template.html';
   styles: [styles],
   template
 })
-class AppComponent {}
+class AppComponent {
+  static get parameters() {
+    return [[PlaylistService]];
+  }
+
+  constructor(playlistService) {
+    this.playlistService = playlistService;
+    this.station         = null;
+
+    playlistService.current.subscribe(current => {
+      this.station = current;
+    });
+  }
+}
 
 export default AppComponent;

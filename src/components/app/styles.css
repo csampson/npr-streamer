@@ -1,11 +1,22 @@
+/* Colors: https://coolors.co/ffffff-4c5454-ff715b-1ea896-523f38 */
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
 .app {
-  background:#f5f5f5;
+  color: #4C5454;
   font-family: 'Open Sans', sans-serif;
   font-size: 0.85rem;
   height: 100%;
   padding: 2rem;
+  margin: 25vh auto 0;
+  display: table;
+}
+
+.header {
+  color: #FF715B;
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-align: center;
 }

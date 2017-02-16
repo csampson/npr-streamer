@@ -30,6 +30,7 @@ class Player {
 
   constructor(stationService, playlistService) {
     this.station = null;
+    this.player  = null;
     this.status  = STATUS_LOADING;
 
     this.stationService  = stationService;
@@ -37,18 +38,23 @@ class Player {
   }
 
   play() {
+    this.player.play();
     this.status = STATUS_PLAYING;
     return this;
   }
 
   stop() {
+    this.player.pause();
     this.status = STATUS_READY;
     return this;
   }
 
   toggle() {
-    this.status = this.status === STATUS_READY ? STATUS_PLAYING : STATUS_READY;
-    return this;
+    if (this.status === STATUS_READY) {
+      return this.play();
+    }
+
+    return this.stop();
   }
 
   streamLocal() {
@@ -61,8 +67,11 @@ class Player {
         return this.stationService
           .search(filter)
           .subscribe(stations => {
-            this.station = this.playlistService.load(stations[0]);
-            this.play();
+            if (stations.length) {
+              this.station = stations[0];
+              this.player  = new global.Audio('http://tektite.streamguys1.com:5140/wwnolive'); // damn it
+              this.play();
+            }
           });
       },
       error => {
