@@ -6,7 +6,7 @@
   ],
   "rules": {
     "new-cap": 0,
-    "comma-dangle": ["error", "only-multiline"],
+    "comma-dangle": [2, "only-multiline"],
     "max-len": [1, 175, 2, { "ignoreComments": true }],
     "no-cond-assign": [2, "except-parens"],
     "no-unused-vars": [1, { "vars": "local", "args": "none" }],
