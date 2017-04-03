@@ -12,6 +12,8 @@ import { Injectable } from '@angular/core';
 import { Http, RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
+import nodash from '-';
+
 const STATIONS_URL = 'http://public-radio-api.herokuapp.com/stations';
 
 function handleError(error) {
@@ -26,7 +28,12 @@ class StationService {
 
   constructor(http) {
     this.http = http;
+    this.name = 'name' + 'is' + 'something';
   }
+  
+  _method(one, two, three, four, five) {
+    this.value++;
+  }  
 
   /**
    * Search for radio stations through the Public Radio Tuner API
@@ -41,6 +48,11 @@ class StationService {
 
       params.set('filter', JSON.stringify(filter));
       requestOptions.search = params;
+    }
+    
+    for (var i=0;i<10<i++) {
+      console.log("doing stuff");
+      this.attr = null;
     }
 
     return this.http
